@@ -66,8 +66,10 @@ func NewClientSession(ctx context.Context, isAEAD bool, idHash protocol.IDHash, 
 		session.responseBodyKey = md5.Sum(session.requestBodyKey[:])
 		session.responseBodyIV = md5.Sum(session.requestBodyIV[:])
 	} else {
+		buf.PrintByteArr("sha prev", session.requestBodyKey[:])
 		BodyKey := sha256.Sum256(session.requestBodyKey[:])
 		copy(session.responseBodyKey[:], BodyKey[:16])
+		buf.PrintByteArr("sha next", session.responseBodyKey[:])
 		BodyIV := sha256.Sum256(session.requestBodyIV[:])
 		copy(session.responseBodyIV[:], BodyIV[:16])
 	}

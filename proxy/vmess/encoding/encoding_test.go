@@ -45,6 +45,7 @@ func TestRequestSerialization(t *testing.T) {
 	buffer := buf.New()
 	client := NewClientSession(context.TODO(), true, protocol.DefaultIDHash, 0)
 	common.Must(client.EncodeRequestHeader(expectedRequest, buffer))
+	buf.PrintByteArr("encoded header", buffer.Bytes())
 
 	buffer2 := buf.New()
 	buffer2.Write(buffer.Bytes())

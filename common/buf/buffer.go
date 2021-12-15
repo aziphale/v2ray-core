@@ -1,7 +1,9 @@
 package buf
 
 import (
+	"fmt"
 	"io"
+	"strings"
 
 	"github.com/v2fly/v2ray-core/v4/common/bytespool"
 )
@@ -241,4 +243,23 @@ func (b *Buffer) ReadFullFrom(reader io.Reader, size int32) (int64, error) {
 // String returns the string form of this Buffer.
 func (b *Buffer) String() string {
 	return string(b.Bytes())
+}
+
+// PrintByteArr print byte array
+func PrintByteArr(tag string, bytes []byte) {
+	if bytes == nil {
+		fmt.Printf("%s is nil\n", tag)
+	}
+	fmt.Printf("%s byte length %d\n", tag, len(bytes))
+	fmt.Printf("%s format:\n", tag)
+	arr := make([]string, 0, len(bytes))
+	for _, piece := range bytes {
+		arr = append(arr, fmt.Sprintf("(byte)0b%08b", piece))
+	}
+	fmt.Printf("{%s}\n", strings.Join(arr, ", "))
+	fmt.Printf("%s buffer:\n", tag)
+	for index, piece := range bytes {
+		fmt.Printf("[%d]%08b ", index+1, piece)
+	}
+	fmt.Print("\n\n")
 }
