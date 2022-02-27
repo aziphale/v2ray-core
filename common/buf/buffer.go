@@ -5,7 +5,7 @@ import (
 	"io"
 	"strings"
 
-	"github.com/v2fly/v2ray-core/v4/common/bytespool"
+	"github.com/v2fly/v2ray-core/v5/common/bytespool"
 )
 
 const (
